@@ -1,0 +1,219 @@
+
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-image: linear-gradient(to right, rgba(225, 136, 136, 0), rgb(190, 16, 16));
+
+}
+.title{
+    color: white;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+}
+.layOut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+    width: 100vw;
+    height: 100vh;
+}
+.wrapper {
+    overflow-y: auto;
+    scrollbar-width: thin; 
+  }
+  
+  .wrapper::-webkit-scrollbar {
+    width: 10px; 
+    border-radius: 1rem;
+  }
+  
+  .wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  
+  .wrapper::-webkit-scrollbar-thumb {
+    background:white; 
+    border-radius: 4px;
+  }
+  
+  .wrapper::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  
+  
+.hamMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: transform 0.3s ease-in-out;
+    width: 30vw;
+    height: 100vh;
+    overflow-y: scroll;
+    background-image: linear-gradient(to right, rgba(225, 136, 136,0), rgb(190, 16, 16));
+    border-radius: 1rem;
+    padding: 1rem;
+}
+.sideBar{
+    margin-top: 1rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.crossIcon{
+    color: white;
+    object-fit: cover;
+    align-self: flex-end;
+    display: none;
+    cursor: pointer;
+    position: fixed;
+}
+.sideCard{
+    display: flex;
+    flex-direction: row;
+    
+}
+.sideCard span{
+    color: white;
+    font-size: 1.2rem;
+}
+.songArtist{
+    margin: 3rem;
+}
+.sideCard  .artistSpan{
+    font-size: 1.25rem;
+}
+.sideCard img{
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    border: 5px solid white;
+    margin: 1rem auto;
+}
+.songArtist{
+    display: flex;
+    flex-direction: column;
+    height: 1rem;
+    
+}
+.container{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    margin: 0 auto;
+    padding: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Poppins';  
+    border-radius: 1rem;
+    
+}
+
+.container img{
+    width: 13rem;
+    height: 13rem;
+    border-radius: 50%;
+    border: 6px solid white;
+    object-fit: cover;
+    animation: zoom-in-out 1s ease infinite;
+    
+}
+.container .musicTime{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.musicTime .timeSpan{
+    margin: 0 1rem;
+    color:white;
+    font-size: 1.25rem;
+
+}
+.container span{
+    color: white;
+    font-size: 1.5rem;
+}
+.container input{
+    width: 25vw;
+}
+.playList{
+    object-fit: cover;
+    display: none;
+    cursor: pointer;
+}
+.icons{
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.icons i{
+    color: white;
+    height: 3rem;
+    width: 3rem;
+    margin: 1rem;
+    
+}
+@keyframes zoom-in-out{
+    0%{
+        transform: scale(0.98,0.98);
+    }
+    50%{
+        transform: scale(0.99,0.99);
+
+    }
+    100%{
+        transform: scale(1,1);
+   
+    }
+}
+@media screen and (max-width:980px) {
+    .playList{
+        display: flex;
+    }
+    .crossIcon{
+        display: flex;
+
+    }
+    
+.container{
+    position: absolute;
+    z-index: 1;
+    height: 30vh;
+}
+
+.wrapper{
+    position: absolute;
+    transition: transform 0.4s ease-in-out;
+    width: 80vw;
+    z-index: 2;
+    background-image: linear-gradient(to right, rgba(225, 136, 136, 0), rgb(190, 16, 16));
+}
+
+}
+@media screen and (max-width:480px){
+.container{
+    width: 40vw;
+    height: 50vh;
+}
+.container img{
+    width: 9rem;
+    height: 9rem;
+}
+.layOut{
+    width: 70vw;
+    height: 70vh;
+}
+.hamMenu{
+    width: 80vw;
+    height: 70vh;
+
+}
+.container span{
+    font-size: 1rem;   
+}
+
+}
