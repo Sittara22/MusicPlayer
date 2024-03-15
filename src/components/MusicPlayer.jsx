@@ -11,7 +11,6 @@ function MusicPlayer() {
     const [musicTotalLength,setmusicTotalLenght]=useState("04:00");
     const [musicCurrentTime,setmusicCurrentTime]=useState('00:00');
     const [showPlayList,setShowPlayList]=useState(true);
-    const [showCross,setshowCross]=useState(false);
     
 
     const musicApi=[
