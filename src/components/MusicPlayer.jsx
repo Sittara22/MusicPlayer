@@ -1,4 +1,5 @@
 import React, { useState,useRef } from 'react';
+import SongList from './SongList';
 import './musicPlayer.css';
 
 
@@ -10,7 +11,7 @@ function MusicPlayer() {
     const [musicIndex,setmusicIndex]=useState(0);
     const [musicTotalLength,setmusicTotalLenght]=useState("04:00");
     const [musicCurrentTime,setmusicCurrentTime]=useState('00:00');
-    const [showPlayList,setShowPlayList]=useState(true);
+    const [showPlayList,setShowPlayList]=useState(false);
     
 
     const musicApi=[
@@ -121,17 +122,21 @@ songCover:'/assets/covers/5.jpg',
 songArtist:'KK Raj'
 }
     ]
+    //Song Object...using UseState
 const [currentSongDet,setCurrentSongDet]=useState({
     songName:'Daylight',
     songSrc:'/assets/songs/1.mp3',
     songCover:'/assets/covers/1.jpg',
     songArtist:'JS_Dj'
 })
+//handle music Bar and calculate song progress on bar.
     const handleMusicBar=(e)=>{
         setMusicProgress(e.target.value);
         currentAudio.current.currentTime=e.target.value * currentAudio.current.duration/100;
     }
+    //Reference for current song 
     const currentAudio=useRef();
+    //Handle song play and Pause 
     const handleAudio=()=>{
         if(currentAudio.current.paused){
             currentAudio.current.play();
@@ -142,6 +147,7 @@ const [currentSongDet,setCurrentSongDet]=useState({
         }
 
     }
+    //play next song
     const handleNextSong=()=>{
         if(musicIndex >= musicApi.length-1){
             let setNumber=0;
@@ -154,6 +160,7 @@ const [currentSongDet,setCurrentSongDet]=useState({
             updateCurrentSong(setNumber);
         }
     }
+    //handle previous song
     const handlePreviouse=()=>{
         if(musicIndex === 0){
             let setNumber=musicApi.length-1;
@@ -166,7 +173,7 @@ const [currentSongDet,setCurrentSongDet]=useState({
             updateCurrentSong(setNumber);
         }
     }
-
+//Update song [change song]
     const updateCurrentSong=(songNumber)=>{
         let songObject=musicApi[songNumber];
         currentAudio.current.src=songObject.songSrc;
@@ -194,31 +201,14 @@ const [currentSongDet,setCurrentSongDet]=useState({
          const progress=parseInt((currentAudio.current.currentTime/currentAudio.current.duration)*100);
     setMusicProgress(isNaN(progress)?0:progress);
         }
-        //Handle Cross Icon
-const handleCross=()=>{
-           setShowPlayList(false);
-        }
-        //handleSongCard
-        const handleSongCard=(index)=>{
-            updateCurrentSong(index);   
-        }
         
   return (
 
 <>  
  <h1 className='title'>Musically</h1>
 <div className="layOut">
-        <div className="hamMenu wrapper" style={{display:showPlayList?'flex':'none'}}>
-        <div className="sideBar">
-        <i className="fa-regular fa-circle-xmark crossIcon" onClick={handleCross}></i>
-        {musicApi.map((musiCard,index)=>(
-             <div className="sideCard" onClick={()=>handleSongCard(index)} key={musiCard.id}> <div className="cardImg"><img src={musiCard.songCover} alt="" /><audio src={musiCard.songSrc}></audio></div>
-             <div className="songArtist"><span >{musiCard.songName}</span><span className='artistSpan'>{musiCard.songArtist}</span></div></div>     
-            ))}
-        </div>
-        </div>
+        <SongList updateCurrentSong={updateCurrentSong} showPlayList={showPlayList} setShowPlayList={setShowPlayList} musicApi={musicApi}/>
         <div className="container">
-            
             <audio src='/assets/songs/1.mp3'  ref={currentAudio} onTimeUpdate={handleAudioUpdate}></audio>
             <div className="imgFrame"><img src={currentSongDet.songCover}  id='songCover' alt="loading..." /></div>
             <span className="songName">{currentSongDet.songName}</span>
@@ -232,11 +222,9 @@ const handleCross=()=>{
             <i className="fa-solid fa-list playList" onClick={()=>{setShowPlayList(!showPlayList)}}></i>
             <i className="fa-solid fa-angle-left" onClick={handlePreviouse}></i>
             <i className={`fa-solid ${isAudioPlaying?'fa-pause':'fa-play'} `}onClick={handleAudio}></i>
-            <i className="fa-solid fa-angle-right" onClick={handleNextSong}></i>
-            
+            <i className="fa-solid fa-angle-right" onClick={handleNextSong}></i>           
             </div>
         </div> 
-       
         </div>
 
 </>
